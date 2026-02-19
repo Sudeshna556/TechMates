@@ -1,0 +1,59 @@
+HTTPS (Hypertext Transfer Protocol Secure): 
+- So when we are talking about HTTPS, we are talking about HTTP + SSL/TLS(transport layer security/secure sockets layer), basically it provides an additional layer of security.
+
+- This protocol adds a layer of security through SSL/TLS, encrypting data during transmission. You can identify a secure HTTPS connection by a green padlock icon in the browser. Although data is encrypted, some information like the target server, port, and data size can still be observed. HTTPS is heavier than HTTP due to the added security mechanisms and typically uses port 443.
+
+For example when sending some data from client to server, the data is first encrypted using SSL/TLS and then sent to the server. The server then decrypts the data and processes it  and vice versa.
+
+# SSL/TLS Encryption Mechanisms :
+
+There are two main types of encryption used in SSL/TLS:
+
+1. Symmetric Encryption
+2. Asymmetric Encryption
+
+### Symmetric Encryption:
+- After the handshake is done, the client and server use symmetric encryption to encrypt the data being sent between them. Basically it uses a single common key for both encryption and decryption. It is simpler, lightweight, and relatively easier to break.
+
+### Asymmetric Encryption:
+- Uses two different keys—a public key for encryption (sent by the server to the client) and a private key for decryption (kept only by the server). This method is stronger and harder to crack.
+
+## NOTE :  wheneever we are doing SSL encryption then it generally combines both symmetric and asymmetric encryption rather then using only one of them.
+
+# SSL Handshake Process :
+
+![alt text](image.png)
+
+**Step 1: Server → Browser**  
+- Server sends its **digital certificate** containing the **asymmetric public key**.  
+- Browser verifies the certificate against trusted Certificate Authorities.
+
+**Step 2: Browser → Server**  
+- Browser generates a **temporary symmetric session key**.  
+- Encrypts this session key using the server’s **public key**.  
+- Sends the encrypted session key to the server.
+
+**Step 3: Server → Browser**  
+- Server uses its **private key** to decrypt the session key.  
+- Now both sides share the same symmetric key.
+
+**Step 4: Secure Session Established**  
+- All further communication is encrypted with the **symmetric session key**.  
+- This key is **unique to the session** and discarded afterward, ensuring forward secrecy.  
+
+---
+insort,
+- The server sends its asymmetric public key to the browser.
+- The browser generates a symmetric session key, encrypts it using the server's public key, and sends it to the server.
+- The server uses its asymmetric private key to decrypt the session key.
+- From this point, both the server and browser use the symmetric session key for encrypted communication throughout the session. This session key is temporary and unique to each session.
+
+## Key Takeaways
+- **Asymmetric encryption** secures the key exchange.  
+- **Symmetric encryption** secures the actual data transfer.  
+- The handshake ensures both confidentiality and authenticity before switching to fast symmetric encryption.  
+
+---
+
+
+
